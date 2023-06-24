@@ -26,14 +26,14 @@ pipeline {
         stage('Test') {
             steps {
                 // Run tests using Maven
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
                 // Package the application (e.g., create JAR, WAR, etc.)
-                sh 'mvn package'
+                bat 'mvn package'
             }
         }
 
@@ -44,7 +44,7 @@ pipeline {
  
 
                 // Example: Deploy to Tomcat using Cargo plugin
-                sh 'mvn cargo:deploy'
+                bat 'mvn cargo:deploy'
             }
         }
     }
