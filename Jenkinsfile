@@ -14,12 +14,12 @@ pipeline {
         stage('Build') {
             steps {
                 // Set up Maven
-               // tool 'Maven'
+                tool 'Maven'
 
  
 
                 // Build the Maven project
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
