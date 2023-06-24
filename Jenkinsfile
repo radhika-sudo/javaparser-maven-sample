@@ -14,7 +14,7 @@ pipeline {
         stage('Build') {
             steps {
                 // Set up Maven
-                tool 'Maven'
+                // tool 'Maven'
 
  
 
