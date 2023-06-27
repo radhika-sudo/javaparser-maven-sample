@@ -26,8 +26,6 @@ pipeline {
             }
         }
 
-    
-     stages {
          stage('Build and Push Docker Image') {
              steps {
                  script {
@@ -38,7 +36,7 @@ pipeline {
                     }
                 }
             }
-        }
+        
     }
 
 
@@ -68,5 +66,5 @@ pipeline {
         //         bat 'mvn cargo:deploy'
         //     }
         // }
-    }
+
 }
