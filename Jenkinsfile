@@ -31,10 +31,10 @@ pipeline {
          stage('Build and Push Docker Image') {
              steps {
                  script {
-                     docker.withRegistry('<your-docker-registry-url>', '<your-docker-registry-credentials-id>') {
+                     docker.withRegistry('<public.ecr.aws/m8n3a3f5/docker-container>', '<your-docker-registry-credentials-id>') {
                         // Your Docker commands here, such as building and pushing the image
-                        sh 'docker build -t my-image .'
-                        sh 'docker push my-image'
+                        bat 'docker build -t my-image .'
+                        bat 'docker push my-image'
                     }
                 }
             }
