@@ -1,71 +1,88 @@
 pipeline {
+
     agent any
-    
-    environment {
-        DOCKER_REGISTRY_CREDENTIALS = credentials('docker-credentials')
-    }
+
  
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout source code from version control
-                checkout scm
-            }
-        }
 
         stage('Build') {
+
             steps {
-                // Set up Maven
-                // tool 'Maven'
+
+                // Checkout source code from version control (e.g., Git)
+
+                git branch: 'master', url: 'https://github.com/radhika-sudo/javaparser-maven-sample.git'
 
  
 
-                // Build the Maven project
+                // Build Maven project
+
                 bat 'mvn clean install'
+
             }
+
         }
 
-         stage('Build and Push Docker Image') {
-             steps {
-                 script {
-                     docker.withRegistry('<public.ecr.aws/m8n3a3f5/docker-container>', '<your-docker-registry-credentials-id>') {
-                        // Your Docker commands here, such as building and pushing the image
-                        bat 'docker build -t my-image .'
-                        bat 'docker push my-image'
-                    }
-                }
+
+        stage('Build Docker Image') {
+
+            steps {
+
+                // Build Docker image using Dockerfile
+
+                bat 'docker build -t my-docker-image:latest .'
+
             }
-        
-    }
 
-
-
-      
-        // stage('Test') {
-        //     steps {
-        //         // Run tests using Maven
-        //         bat 'mvn test'
-        //     }
-        // }
-
-        // stage('Package') {
-        //     steps {
-        //         // Package the application (e.g., create JAR, WAR, etc.)
-        //         bat 'mvn package'
-        //     }
-        // }
-
-        // stage('Deploy') {
-        //     steps {
-        //         // Perform deployment steps here (e.g., deploying to a server)
+        }
 
  
 
-        //         // Example: Deploy to Tomcat using Cargo plugin
-        //         bat 'mvn cargo:deploy'
+        stage('Push Docker Image') {
+
+            steps {
+
+                // Push Docker image to Docker registry (e.g., Docker Hub)
+
+                withDockerRegistry(credentialsId: 'docker-registry-credentials-id', url: 'public.ecr.aws/m8n3a3f5/docker-container') {
+
+                    bat 'docker push my-docker-image:latest'
+
+                }
+
+            }
+
+        }
+
+ 
+
+        // stage('Deploy to Kubernetes') {
+
+        //     steps {
+
+        //         // Deploy to Kubernetes cluster
+
+        //         script {
+
+        //             def kubeConfig = readFile("path/to/kube/config")
+
+        //             def kubeNamespace = 'my-namespace'
+
+ 
+
+        //             withKubeConfig(credentialsId: 'kubernetes-credentials-id', kubeconfigContent: kubeConfig) {
+
+        //                 sh "kubectl apply -f path/to/kube/manifests -n $kubeNamespace"
+
+        //             }
+
+        //         }
+
         //     }
+
         // }
 
-}
+    }
+
 }
