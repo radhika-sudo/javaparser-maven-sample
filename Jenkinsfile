@@ -31,7 +31,7 @@ pipeline {
 
                 // Build Docker image using Dockerfile
 
-                sh 'sudo docker build -t my-docker-image:latest .'
+                sh 'sudo -S docker build -t my-docker-image:latest .'
 
             }
 
