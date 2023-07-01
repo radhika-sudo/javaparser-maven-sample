@@ -18,7 +18,7 @@ pipeline {
 
                 // Build Maven project
 
-                bat 'mvn clean install'
+                sh 'mvn clean install'
 
             }
 
@@ -31,7 +31,7 @@ pipeline {
 
                 // Build Docker image using Dockerfile
 
-                bat 'docker build -t my-docker-image:latest .'
+                sh 'docker build -t my-docker-image:latest .'
 
             }
 
@@ -47,7 +47,7 @@ pipeline {
 
                 withDockerRegistry(credentialsId: 'docker-registry-credentials-id', url: 'public.ecr.aws/m8n3a3f5/docker-container') {
 
-                    bat 'docker push my-docker-image:latest'
+                    sh 'docker push my-docker-image:latest'
 
                 }
 
