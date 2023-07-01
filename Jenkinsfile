@@ -31,7 +31,7 @@ pipeline {
 
                 // Build Docker image using Dockerfile
 
-                sh 'docker build -t my-docker-image:latest .'
+                sh 'sudo docker build -t my-docker-image:latest .'
 
             }
 
@@ -47,7 +47,7 @@ pipeline {
 
                 withDockerRegistry(credentialsId: 'docker-registry-credentials-id', url: 'public.ecr.aws/m8n3a3f5/docker-container') {
 
-                    sh 'docker push my-docker-image:latest'
+                    sh 'sudo docker push my-docker-image:latest'
 
                 }
 
