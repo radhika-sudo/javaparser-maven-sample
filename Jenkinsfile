@@ -31,7 +31,7 @@ pipeline {
 
                 // Build Docker image using Dockerfile
 
-                def dockerImage = docker.build('my-docker-image:latest', './https://github.com/radhika-sudo/javaparser-maven-sample/blob/master/Dockerfile')
+                def dockerImage = docker.build('my-docker-image:latest', '.')
 
                 sh 'sudo -S docker build -t my-docker-image:latest .'
                 
