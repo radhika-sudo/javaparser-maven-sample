@@ -42,15 +42,29 @@ pipeline {
 
  
 
-        stage('Push Docker Image') {
+stage('Push to ECR') {
 
             steps {
 
-                // Push Docker image to Docker registry (e.g., Docker Hub)
+                withCredentials([[
 
-                withDockerRegistry(credentialsId: 'docker-registry-credentials-id', url: 'public.ecr.aws/m8n3a3f5/docker-container') {
+                    $class: 'AmazonWebServicesCredentialsBinding',
 
-                    sh 'sudo docker push my-docker-image:latest'
+                    accessKeyVariable: 'AKIAWKSJQBPBAKYYOJG5',
+
+                    secretKeyVariable: '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',
+
+                    credentialsId: '435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2'
+
+                ]]) {
+
+                    docker.withRegistry('435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2', 'aws-ecr-credentials') {
+
+                        // Push the Docker image to ECR
+
+                        sh 'docker push 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/docker-container2:<TAG>'
+
+                    }
 
                 }
 
