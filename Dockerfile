@@ -38,7 +38,7 @@ WORKDIR /app
 
 # Copy the built JAR file from the previous stage to the container
 
-COPY --from=build /app/target/myapp.jar .
+COPY --from=build /app/myapp.jar .
 
  
 
