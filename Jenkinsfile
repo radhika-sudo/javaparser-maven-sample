@@ -103,3 +103,4 @@ stage('Push to ECR') {
     }
 
 }
+}
