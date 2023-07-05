@@ -38,7 +38,7 @@ WORKDIR /home/ubuntu
 
 # Copy the built JAR file from the previous stage to the container
 
-// COPY --from=build /tmp/winstone13249809229087435230.jar .
+# COPY --from=build /tmp/winstone13249809229087435230.jar .
 
  
 
