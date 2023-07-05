@@ -32,13 +32,13 @@ FROM openjdk:11-jre-slim
 
 # Set the working directory inside the container
 
-WORKDIR /app
+WORKDIR /home/ubuntu
 
  
 
 # Copy the built JAR file from the previous stage to the container
 
-COPY --from=build /app/myapp.jar .
+COPY --from=build /tmp/winstone13249809229087435230.jar .
 
  
 
