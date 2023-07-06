@@ -42,9 +42,9 @@ pipeline {
 
  
 
-stage('Push to ECR') {
+        stage('Push to ECR') {
 
-            steps {
+             steps {
 
                 withCredentials([[
 
@@ -71,7 +71,7 @@ stage('Push to ECR') {
             }
 
         }
-
+}
  
 
         // stage('Deploy to Kubernetes') {
@@ -100,4 +100,4 @@ stage('Push to ECR') {
 
         // }
 
-    }
+
