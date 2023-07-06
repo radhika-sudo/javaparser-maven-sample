@@ -54,7 +54,7 @@ stage('Push to ECR') {
 
                     secretKeyVariable: 'aaD8OGzA/vnawF5iYf13bFRHRPQUnXh5HkzQxdsW',
 
-                   // credentialsId: '435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2'
+                    credentialsId: '435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2'
 
                 ]]) {
 
