@@ -58,7 +58,7 @@ pipeline {
 
                 ]]) {
 
-                   // docker.withRegistry('435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2', 'aws-ecr-credentials') {
+                   // docker.withRegistry('435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2', 'aws-ecr-credentials') 
 
                         // Push the Docker image to ECR
 
@@ -71,7 +71,7 @@ pipeline {
             }
 
         }
-}
+
 }
  
 
