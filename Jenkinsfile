@@ -62,7 +62,7 @@ pipeline {
 
                         // Push the Docker image to ECR
 
-                        sh 'docker push 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/docker-container2:<TAG>'
+                        // sh 'docker push '
 
                     }
 
