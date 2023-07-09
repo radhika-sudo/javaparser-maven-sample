@@ -62,7 +62,7 @@ pipeline {
 
                         // Push the Docker image to ECR
 
-                         sh 'docker push my-docker-image:latest '
+                         sh 'sudo docker push my-docker-image:latest '
 
                     }
 
