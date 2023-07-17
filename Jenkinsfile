@@ -70,7 +70,39 @@ pipeline {
 
             }
 
-        }
+  stage('Deploy to Kubernetes') {
+
+     environment {
+
+       KUBECONFIG = '/path/to/kubeconfig'  // Path to the Kubernetes cluster configuration file
+
+     }
+
+     steps {
+
+       container('kubectl') {
+
+         // Install kubectl in a Jenkins container
+
+         sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl" && chmod +x kubectl && sudo mv kubectl /usr/local/bin/'
+
+       }
+
+ 
+
+       script {
+
+         // Deploy Kubernetes resources using kubectl
+
+         sh 'kubectl apply -f your-deployment.yaml'
+
+       }
+
+     }
+
+   }
+
+}
 
 }
  
