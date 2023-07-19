@@ -1,53 +1,81 @@
-apiVersion: apps/v1
+# deployment.yaml
+
+ apiVersion: apps/v1
 
 kind: Deployment
 
 metadata:
 
- name: my-deployment
+  name: example-deployment
 
 spec:
 
- replicas: 3
+  replicas: 3
 
- selector:
+  selector:
 
-   matchLabels:
+    matchLabels:
 
-     app: my-app
+      app: example-app
 
- template:
+  template:
 
-   metadata:
+    metadata:
 
-     labels:
+      labels:
 
-       app: my-app
+        app: example-app
 
-   spec:
+    spec:
 
-     containers:
+      containers:
 
-       - name: my-container
+        - name: example-container
 
-         image: my-container-image:latest
+          image: 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/
 
-         ports:
+          ports:
 
-           - containerPort: 80
+            - containerPort: 8080
+
+ 
+
 ---
-apiVersion: v1
 
-kind: Pod
+ 
+
+# ingress.yaml
+
+ 
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
 
 metadata:
 
-  name: my-pod
+  name: example-ingress
 
 spec:
 
-  containers:
+  rules:
 
-    - name: my-container
+    - host: your-domain.com
 
-      image: my-container-image:tag
+      http:
+
+        paths:
+
+          - path: /
+
+            pathType: Prefix
+
+            backend:
+
+              service:
+
+                name: example-service
+
+                port:
+
+                  number: 8080
