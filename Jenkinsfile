@@ -74,7 +74,7 @@ pipeline {
 
      environment {
 
-       KUBECONFIG = 'C:\Users\venkatesh\.kube'  // Path to the Kubernetes cluster configuration file
+       KUBECONFIG = 'C:/Users/venkatesh/.kube'  // Path to the Kubernetes cluster configuration file
 
      }
 
