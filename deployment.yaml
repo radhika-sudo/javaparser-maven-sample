@@ -32,7 +32,7 @@ spec:
 
         - name: example-container
 
-          image: 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/
+          image: 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/my-docker-image:latest
 
           ports:
 
