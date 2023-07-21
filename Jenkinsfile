@@ -103,12 +103,10 @@ pipeline {
         // }
 
 
-        pipeline {
-    agent any
-
-    stages {
-        stage('Build and Push Docker Image') {
-            environment {
+        
+    
+          stage('Build and Push Docker Image') {
+             environment {
                 ECR_REGISTRY = '435019582402.dkr.ecr.ap-south-1.amazonaws.com'
                 DOCKER_IMAGE = 'docker-container2'
                 DOCKER_TAG = 'latest'
@@ -132,8 +130,7 @@ pipeline {
                 }
             }
         }
-    }
-}
+
 
 
   stage('Deploy to Kubernetes') {
