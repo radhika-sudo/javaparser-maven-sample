@@ -42,33 +42,65 @@ pipeline {
 
  
 
-        stage('Push to ECR') {
+        // stage('Push to ECR') {
 
-             steps {
+        //      steps {
 
-                withCredentials([[
+        //         withCredentials([[
 
-                    $class: 'AmazonWebServicesCredentialsBinding',
+        //             $class: 'AmazonWebServicesCredentialsBinding',
 
-                    accessKeyVariable: 'AKIAWKSJQBPBAKYYOJG5',
+        //             accessKeyVariable: 'AKIAWKSJQBPBAKYYOJG5',
 
-                    secretKeyVariable: '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',
+        //             secretKeyVariable: 'aaD8OGzA/vnawF5iYf13bFRHRPQUnXh5HkzQxdsW',
 
-                    credentialsId: '77873b56-d0b2-4017-a15a-8037ea7dd41b'
+        //             credentialsId: '77873b56-d0b2-4017-a15a-8037ea7dd41b'
 
-                ]]) {
+        //         ]]) {
 
-                   // docker.withRegistry('435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2', 'aws-ecr-credentials') 
+        //            // docker.withRegistry('435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2', 'aws-ecr-credentials') 
 
-                        // Push the Docker image to ECR
+        //                 // Push the Docker image to ECR
 
-                         sh 'sudo docker push my-docker-image:latest '
+        //                  sh 'sudo docker push my-docker-image:latest '
 
-                    }
+        //             }
+
+        //         }
+
+        //     }
+
+
+                stage('Login to AWS ECR') {
+
+            steps {
+
+                // Log in to AWS ECR using the AWS CLI
+
+                sh "aws ecr get-login-password --region ${ap-south-1} | docker login --username AWS --password-stdin ${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}"
+
+            }
+
+        }
+
+ 
+
+        stage('Push Docker Image to ECR') {
+
+            steps {
+
+                // Push the Docker image to ECR
+
+                script {
+
+                    docker.image("${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}/${docker-container2}:${my-docker-image:latest}").push()
 
                 }
 
             }
+
+        }
+
 
   stage('Deploy to Kubernetes') {
 
