@@ -77,7 +77,7 @@ pipeline {
 
                 // Log in to AWS ECR using the AWS CLI
 
-                sh "aws ecr get-login-password --region ${ap-south-1} | docker login --username AWS --password-stdin ${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}"
+                sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2"
 
             }
 
@@ -93,7 +93,7 @@ pipeline {
 
                 script {
 
-                    docker.image("${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}/${docker-container2}:${latest}").push()
+                    docker.image("435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/docker-container2:latest").push()
 
                 }
 
