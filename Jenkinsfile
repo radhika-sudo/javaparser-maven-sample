@@ -105,7 +105,7 @@ pipeline {
 
         
     
-          stage('Build and Push Docker Image') {
+          stage('Push Docker Image') {
              environment {
                 ECR_REGISTRY = '435019582402.dkr.ecr.ap-south-1.amazonaws.com'
                 DOCKER_IMAGE = 'docker-container2'
