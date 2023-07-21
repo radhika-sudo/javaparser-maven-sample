@@ -108,7 +108,7 @@ pipeline {
           stage('Push Docker Image') {
              environment {
                 ECR_REGISTRY = '435019582402.dkr.ecr.ap-south-1.amazonaws.com'
-                DOCKER_IMAGE = 'docker-container2'
+                DOCKER_IMAGE = 'my-docker-image'
                 DOCKER_TAG = 'latest'
             }
             steps {
