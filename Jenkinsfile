@@ -93,7 +93,7 @@ pipeline {
 
                 script {
 
-                    docker.image("${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}/${docker-container2}:${my-docker-image:latest}").push()
+                    docker.image("${435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2}/${docker-container2}:${latest}").push()
 
                 }
 
