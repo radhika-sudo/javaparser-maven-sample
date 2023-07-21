@@ -71,35 +71,69 @@ pipeline {
         //     }
 
 
-                stage('Login to AWS ECR') {
+        //         stage('Login to AWS ECR') {
 
-            steps {
+        //     steps {
 
-                // Log in to AWS ECR using the AWS CLI
+        //         // Log in to AWS ECR using the AWS CLI
 
-                sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2"
+        //         sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2"
 
-            }
+        //     }
 
-        }
+        // }
 
  
 
-        stage('Push Docker Image to ECR') {
+        // stage('Push Docker Image to ECR') {
 
-            steps {
+        //     steps {
 
-                // Push the Docker image to ECR
+        //         // Push the Docker image to ECR
 
-                script {
+        //         script {
 
-                    docker.image("435019582402.dkr.ecr.ap-south-1.amazonaws.com/docker-container2/docker-container2:latest").push()
+        //                sh "docker push ${docker-container2}/${my-docker-image}:${latest}"
 
-                }
 
+        //         }
+
+        //     }
+
+        // }
+
+
+        pipeline {
+    agent any
+
+    stages {
+        stage('Build and Push Docker Image') {
+            environment {
+                ECR_REGISTRY = '435019582402.dkr.ecr.ap-south-1.amazonaws.com'
+                DOCKER_IMAGE = 'docker-container2'
+                DOCKER_TAG = 'latest'
             }
+            steps {
+                script {
+                    // Authenticate with AWS ECR and get the Docker login command
+                    def dockerLoginCommand = sh(
+                        script: "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}",
+                        returnStdout: true
+                    ).trim()
 
+                    // Execute the Docker login command
+                    sh(returnStatus: true, script: dockerLoginCommand)
+
+                    // Build your Docker image here (if not already built)
+                    // docker build -t ${ECR_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG} .
+
+                    // Push the Docker image to ECR
+                    sh "docker push ${ECR_REGISTRY}/${DOCKER_IMAGE}:${DOCKER_TAG}"
+                }
+            }
         }
+    }
+}
 
 
   stage('Deploy to Kubernetes') {
