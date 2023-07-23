@@ -48,17 +48,17 @@ pipeline {
 
                     // Load AWS credentials from Jenkins credentials store
 
-                    def awsAccessKeyId = credentials('AKIAWKSJQBPBCEVBD2UZ')
+                   // def awsAccessKeyId = credentials('AKIAWKSJQBPBCEVBD2UZ')
 
-                    def awsSecretAccessKey = credentials('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')
+                   // def awsSecretAccessKey = credentials('oW/yVkcXBQ8B3G/qtLEKLR0VS744+bpCNZm1LvAJ')
 
  
 
                     // Configure AWS CLI
 
-                    sh "aws configure set aws_access_key_id ${awsAccessKeyId}"
+                    sh "aws configure set aws_access_key_id AKIAWKSJQBPBCEVBD2UZ"
 
-                    sh "aws configure set aws_secret_access_key ${awsSecretAccessKey}"
+                    sh "aws configure set aws_secret_access_key oW/yVkcXBQ8B3G/qtLEKLR0VS744+bpCNZm1LvAJ"
 
                     sh "aws configure set default.region ap-south-1" // Set your desired AWS region
 
